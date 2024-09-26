@@ -1,0 +1,413 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "Sthaan Protocol API",
+    "description" : "API for managing Sthaan User ID creation flow.",
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "url" : "https://api.sthaanprotocol.com"
+  } ],
+  "paths" : {
+    "/api/v1/user-id/check-availability" : {
+      "get" : {
+        "summary" : "Check if the User ID is available.",
+        "operationId" : "checkUserIdAvailability",
+        "parameters" : [ {
+          "name" : "user_id",
+          "in" : "query",
+          "description" : "User ID to check availability for.",
+          "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "User ID is available.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "User ID is already taken.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user-profile/create" : {
+      "post" : {
+        "summary" : "Create a new user profile with contact info and delivery preferences.",
+        "operationId" : "createUserProfile",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/userprofile_create_body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "description" : "User profile created successfully.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_201"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Invalid contact information.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_400"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user-profile/validate-contact" : {
+      "post" : {
+        "summary" : "Send an OTP for contact info validation.",
+        "operationId" : "validateContactInfo",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/userprofile_validatecontact_body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OTP sent to the provided phone number.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_1"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Invalid phone number.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_400"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user-profile/verify-otp" : {
+      "post" : {
+        "summary" : "Verify the OTP for user validation.",
+        "operationId" : "verifyOtp",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/userprofile_verifyotp_body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OTP verified successfully.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_201"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Invalid OTP.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_400"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/sthaan-id/create" : {
+      "post" : {
+        "summary" : "Create a unique Sthaan ID based on the user's address.",
+        "operationId" : "createSthaanId",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/sthaanid_create_body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Sthaan ID created successfully.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_201_1"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Invalid address data provided.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_400"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user-profile/associate-sthaan-id" : {
+      "post" : {
+        "summary" : "Associate the created Sthaan ID with the User ID.",
+        "operationId" : "associateSthaanId",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/userprofile_associatesthaanid_body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Sthaan ID associated with User ID successfully.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_2"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "inline_response_200" : {
+        "type" : "object",
+        "properties" : {
+          "available" : {
+            "type" : "boolean"
+          },
+          "message" : {
+            "type" : "string"
+          }
+        }
+      },
+      "apiv1userprofilecreate_contact_info" : {
+        "type" : "object",
+        "properties" : {
+          "phone_number" : {
+            "type" : "string"
+          },
+          "email" : {
+            "type" : "string"
+          }
+        }
+      },
+      "apiv1userprofilecreate_delivery_preferences" : {
+        "type" : "object",
+        "properties" : {
+          "availability" : {
+            "type" : "string"
+          },
+          "instructions" : {
+            "type" : "string"
+          }
+        }
+      },
+      "userprofile_create_body" : {
+        "type" : "object",
+        "properties" : {
+          "user_id" : {
+            "type" : "string"
+          },
+          "contact_info" : {
+            "$ref" : "#/components/schemas/apiv1userprofilecreate_contact_info"
+          },
+          "delivery_preferences" : {
+            "$ref" : "#/components/schemas/apiv1userprofilecreate_delivery_preferences"
+          }
+        }
+      },
+      "inline_response_201" : {
+        "type" : "object",
+        "properties" : {
+          "message" : {
+            "type" : "string"
+          },
+          "user_id" : {
+            "type" : "string"
+          }
+        }
+      },
+      "inline_response_400" : {
+        "type" : "object",
+        "properties" : {
+          "error" : {
+            "type" : "string"
+          }
+        }
+      },
+      "userprofile_validatecontact_body" : {
+        "type" : "object",
+        "properties" : {
+          "user_id" : {
+            "type" : "string"
+          },
+          "phone_number" : {
+            "type" : "string"
+          }
+        }
+      },
+      "inline_response_200_1" : {
+        "type" : "object",
+        "properties" : {
+          "message" : {
+            "type" : "string"
+          }
+        }
+      },
+      "userprofile_verifyotp_body" : {
+        "type" : "object",
+        "properties" : {
+          "user_id" : {
+            "type" : "string"
+          },
+          "otp" : {
+            "type" : "string"
+          }
+        }
+      },
+      "apiv1sthaanidcreate_address_info" : {
+        "type" : "object",
+        "properties" : {
+          "address_line1" : {
+            "type" : "string"
+          },
+          "city" : {
+            "type" : "string"
+          },
+          "state" : {
+            "type" : "string"
+          },
+          "postal_code" : {
+            "type" : "string"
+          },
+          "country" : {
+            "type" : "string"
+          }
+        }
+      },
+      "apiv1sthaanidcreate_address_metadata" : {
+        "type" : "object",
+        "properties" : {
+          "landmark" : {
+            "type" : "string"
+          },
+          "geocode" : {
+            "type" : "string"
+          }
+        }
+      },
+      "sthaanid_create_body" : {
+        "type" : "object",
+        "properties" : {
+          "user_id" : {
+            "type" : "string"
+          },
+          "address_info" : {
+            "$ref" : "#/components/schemas/apiv1sthaanidcreate_address_info"
+          },
+          "address_metadata" : {
+            "$ref" : "#/components/schemas/apiv1sthaanidcreate_address_metadata"
+          }
+        }
+      },
+      "inline_response_201_1" : {
+        "type" : "object",
+        "properties" : {
+          "message" : {
+            "type" : "string"
+          },
+          "sthaaan_id" : {
+            "type" : "string"
+          }
+        }
+      },
+      "userprofile_associatesthaanid_body" : {
+        "type" : "object",
+        "properties" : {
+          "user_id" : {
+            "type" : "string"
+          },
+          "sthaaan_id" : {
+            "type" : "string"
+          }
+        }
+      },
+      "inline_response_200_2" : {
+        "type" : "object",
+        "properties" : {
+          "message" : {
+            "type" : "string"
+          },
+          "user_id" : {
+            "type" : "string"
+          },
+          "sthaaan_id" : {
+            "type" : "string"
+          }
+        }
+      }
+    }
+  }
+}
