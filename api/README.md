@@ -1,3 +1,14 @@
+### API Summary
+
+1. **`GET /api/v1/user-id/check-availability`**: Check if the User ID is available.
+2. **`POST /api/v1/user-profile/create`**: Create a new user profile with contact info and delivery preferences.
+3. **`POST /api/v1/user-profile/validate-contact`**: Send an OTP for contact info validation.
+4. **`POST /api/v1/user-profile/verify-otp`**: Verify the OTP for user validation.
+5. **`POST /api/v1/sthaan-id/create`**: Create a unique Sthaan ID based on the user's address.
+6. **`POST /api/v1/user-profile/associate-sthaan-id`**: Associate the created Sthaan ID with the User ID.
+
+__________________________________
+
 
 ### 1. **Check User ID Availability**
 
@@ -189,12 +200,3 @@
     ```
 
 ---
-
-### API Summary
-
-1. **`GET /api/v1/user-id/check-availability`**: Check if the User ID is available.
-2. **`POST /api/v1/user-profile/create`**: Create a new user profile with contact info and delivery preferences.
-3. **`POST /api/v1/user-profile/validate-contact`**: Send an OTP for contact info validation.
-4. **`POST /api/v1/user-profile/verify-otp`**: Verify the OTP for user validation.
-5. **`POST /api/v1/sthaan-id/create`**: Create a unique Sthaan ID based on the user's address.
-6. **`POST /api/v1/user-profile/associate-sthaan-id`**: Associate the created Sthaan ID with the User ID.
