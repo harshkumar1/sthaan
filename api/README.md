@@ -108,6 +108,8 @@ __________________________________
 
 ### 4. **Verify OTP**
 
+- [ ] TODO: Review this API. Is it ok to send OTP as a plain text or shouldplain text,d or something?
+
 **Description**: This API verifies the OTP entered by the user.
 
 - **Method**: `POST`
@@ -138,7 +140,10 @@ __________________________________
 
 ### 5. **Create Sthaan ID**
 
-**Description**: This API creates the unique **Sthaan ID** based on the provided address and links it to the User ID.
+- [ ] TODO: Relook at this API. Geocode how does the system get that, through location services. What happens if its not there.
+
+
+**Description's not there? creates the unique **Sthaan ID** based on the provided address and links it to the User ID.
 
 - **Method**: `POST`
 - **Endpoint**: `/api/v1/sthaan-id/create`
@@ -153,7 +158,7 @@ __________________________________
       "postal_code": "110001",
       "country": "India"
     },
-    "address_metadata": {
+    "address_metadata": {    
       "landmark": "Near National Museum",
       "geocode": "28.6129, 77.2295"
     }
@@ -177,6 +182,8 @@ __________________________________
 ---
 
 ### 6. **Associate Sthaan ID with User ID**
+
+- [ ] TODO: Relook at this API. What is the response when associated Sthaan Id is not there.
 
 **Description**: This API links the generated Sthaan ID to the User ID for future address retrieval.
 
