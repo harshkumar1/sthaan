@@ -41,6 +41,7 @@ __________________________________
 ---
 
 ### 2. **Create User Profile**
+- [ ] TODO: Response of User Profile already exists
 
 **Description**: This API handles the initial profile creation for a user, capturing contact details, delivery preferences and delivery preferenceswith the User ID.
 
@@ -108,7 +109,8 @@ __________________________________
 
 ### 4. **Verify OTP**
 
-- [ ] TODO: Review this API. Is it ok to send OTP as a plain text or shouldplain text,d or something?
+- [ ] TODO: Review this API. Is it ok to send OTP as a plain text or should plain text or something?
+- [ ] TODO: Should we allow verification by passing only phone number
 
 **Description**: This API verifies the OTP entered by the user.
 
@@ -184,6 +186,8 @@ __________________________________
 ### 6. **Associate Sthaan ID with User ID**
 
 - [ ] TODO: Relook at this API. What is the response when associated Sthaan Id is not there.
+- [ ] TODO: Clarification: For every User Id is a unique SthaanId is getting created or not? If its getting created then we need a Conflict Error Code.
+- [ ] TODO: Should we have a GET METHOD for this as well
 
 **Description**: This API links the generated Sthaan ID to the User ID for future address retrieval.
 
