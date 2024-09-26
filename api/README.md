@@ -15,14 +15,14 @@
   - **200 OK** (User ID Available):
     ```json
     {
-      "available": "1",
+      "available": true,
       "message": "User ID is available."
     }
     ```
   - **409 Conflict** (User ID Already Taken):
     ```json
     {
-      "available": "0",
+      "available": false,
       "message": "User ID is already taken."
     }
     ```
